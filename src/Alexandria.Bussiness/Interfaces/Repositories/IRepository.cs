@@ -1,0 +1,7 @@
+﻿using Alexandria.Bussiness.Entitties;
+
+namespace Alexandria.Bussiness.Intefaces.Repositories;
+
+public interface IRepository<TEntity, TKey> where TEntity : Entity<TKey>
+{
+}
