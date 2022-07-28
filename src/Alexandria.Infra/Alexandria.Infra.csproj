@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Alexandria.Bussiness\Alexandria.Bussiness.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mappins\" />
+  </ItemGroup>
+
 </Project>

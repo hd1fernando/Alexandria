@@ -1,5 +1,7 @@
 using Alexandria.Bussiness.Interfaces.Notifications;
+using Alexandria.Bussiness.Interfaces.Services;
 using Alexandria.Bussiness.Notifications;
+using Alexandria.Bussiness.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +14,7 @@ builder.Services.AddSwaggerGen();
 
 // DI
 builder.Services.AddTransient<INotifier, Notifier>();
-
+builder.Services.AddTransient<IBookService, BookService>();
 
 var app = builder.Build();
 

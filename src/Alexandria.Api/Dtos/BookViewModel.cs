@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Alexandria.Bussiness.Entitties;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alexandria.Api.Dtos;
 
@@ -12,6 +13,9 @@ public class BookViewModel
 
     [Required(ErrorMessage = "{0} é obrigatório.")]
     public string? ISBN { get; set; }
+
+    public BookEntity ToEntity()
+        => new BookEntity(Title, Price, ISBN);
 
 }
 
