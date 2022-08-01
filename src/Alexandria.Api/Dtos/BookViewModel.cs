@@ -8,7 +8,7 @@ public class BookViewModel
     [Required(ErrorMessage = "{0} é obrigatório.")]
     public string? Title { get; set; }
 
-    [Range(1d, double.MaxValue, ErrorMessage = "{0} deve existir e ser maior do que 0")]
+    [Range(1d, double.MaxValue, ErrorMessage = "{0} deve ser maior ou igual a {1}")]
     public decimal Price { get; set; }
 
     [Required(ErrorMessage = "{0} é obrigatório.")]

@@ -1,7 +1,9 @@
+using Alexandria.Bussiness.Intefaces.Repositories;
 using Alexandria.Bussiness.Interfaces.Notifications;
 using Alexandria.Bussiness.Interfaces.Services;
 using Alexandria.Bussiness.Notifications;
 using Alexandria.Bussiness.Services;
+using Alexandria.Infra.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // DI
-builder.Services.AddTransient<INotifier, Notifier>();
+builder.Services.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
+builder.Services.AddScoped<INotifier, Notifier>();
 builder.Services.AddTransient<IBookService, BookService>();
 
 var app = builder.Build();

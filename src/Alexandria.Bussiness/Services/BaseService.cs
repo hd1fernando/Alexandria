@@ -9,10 +9,8 @@ public abstract class BaseService
 {
     private readonly INotifier _notifier;
 
-    public BaseService(INotifier notifier)
-    {
-        _notifier = notifier;
-    }
+    public BaseService(INotifier notifier) 
+        => _notifier = notifier;
 
     protected void SendNotification(string message)
         => _notifier.Handler(new Notification(message));

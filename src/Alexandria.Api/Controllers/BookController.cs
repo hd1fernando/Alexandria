@@ -1,4 +1,5 @@
 ﻿using Alexandria.Api.Dtos;
+using Alexandria.Bussiness.Interfaces.Notifications;
 using Alexandria.Bussiness.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +9,8 @@ public class BookController : MainController
 {
     private readonly IBookService _bookService;
 
-    public BookController(IBookService bookService)
-    {
-        _bookService = bookService;
-    }
+    public BookController(IBookService bookService, INotifier notifier) : base(notifier) 
+        => _bookService = bookService;
 
     [HttpPost]
     public async Task<ActionResult> Create(BookViewModel bookViewModel, CancellationToken cancellation)
@@ -20,7 +19,7 @@ public class BookController : MainController
 
         await _bookService.CreateBookAsync(book, cancellation);
 
-        return Ok();
+        return CustomResponse();
     }
 }
 
