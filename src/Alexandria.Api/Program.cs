@@ -1,3 +1,4 @@
+using Alexandria.Api.Extensions;
 using Alexandria.Bussiness.Intefaces.Repositories;
 using Alexandria.Bussiness.Interfaces.Notifications;
 using Alexandria.Bussiness.Interfaces.Services;
@@ -18,6 +19,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
 builder.Services.AddScoped<INotifier, Notifier>();
 builder.Services.AddTransient<IBookService, BookService>();
+
+builder.Services.AddNHibernate(builder.Configuration);
+
 
 var app = builder.Build();
 
