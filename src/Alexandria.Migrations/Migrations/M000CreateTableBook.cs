@@ -17,9 +17,10 @@ namespace Alexandria.Migrations.Migrations
             Create.Table(TABLE_NAME)
                 .WithColumn("Id").AsInt64().PrimaryKey().Identity()
                 .WithColumn("Title").AsString().NotNullable()
-                .WithColumn("Price").AsDecimal().NotNullable()
+                .WithColumn("Price").AsDecimal(12, 2).NotNullable()
                 .WithColumn("ISBN").AsString().NotNullable().Unique();
         }
     }
 }
-//dotnet-fm migrate -a .\Alexandria.Migrations.dll -p SqlServer2016 -o -t local -c "Server=localhost,1433;DataBase=Alexandria;User Id=sa;Password=P@ssword42;Trusted_Connection=false"     --allowDirtyAssemblies
+//  dotnet-fm migrate -a .\Alexandria.Migrations.dll -p SqlServer2016 -o -t local -c "Server=localhost,1433;DataBase=Alexandria;User Id=sa;Password=P@ssword42;Trusted_Connection=false"     --allowDirtyAssemblies
+//  dotnet-fm rollback -a .\Alexandria.Migrations.dll -p SqlServer2016 -o -t local -c "Server=localhost,1433;DataBase=Alexandria;User Id=sa;Password=P@ssword42;Trusted_Connection=false"     --allowDirtyAssemblies
