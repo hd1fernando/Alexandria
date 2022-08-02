@@ -4,6 +4,7 @@ using NHibernate;
 using NHibernate.Linq;
 
 namespace Alexandria.Infra.Repositories;
+
 public class Repository<TEntity, TKey> : IRepository<TEntity, TKey>
     where TEntity : Entity<TKey>
     where TKey : IEquatable<TKey>

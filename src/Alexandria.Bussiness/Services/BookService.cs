@@ -8,9 +8,9 @@ namespace Alexandria.Bussiness.Services;
 
 public class BookService : BaseService, IBookService
 {
-    private readonly IRepository<BookEntity, int> _bookRepository;
+    private readonly IBookRepository _bookRepository;
 
-    public BookService(INotifier notifier, IRepository<BookEntity, int> bookRepository) : base(notifier)
+    public BookService(INotifier notifier, IBookRepository bookRepository) : base(notifier)
     {
         _bookRepository = bookRepository;
     }
@@ -19,7 +19,7 @@ public class BookService : BaseService, IBookService
     {
         ArgumentNullException.ThrowIfNull(book, nameof(book));
 
-        if (DoValidation<BookEntityValidation, BookEntity, int>(new BookEntityValidation(), book) == false)
+        if (await DoValidationAsync<BookEntityValidation, BookEntity, int>(new BookEntityValidation(_bookRepository), book) == false)
             return;
 
         await _bookRepository.AddAsync(book, cancellationToken);

@@ -9,7 +9,7 @@ public abstract class BaseService
 {
     private readonly INotifier _notifier;
 
-    public BaseService(INotifier notifier) 
+    public BaseService(INotifier notifier)
         => _notifier = notifier;
 
     protected void SendNotification(string message)
@@ -26,6 +26,19 @@ public abstract class BaseService
         where TEntity : Entity<TKey>
     {
         var validator = validation.Validate(entity);
+
+        if (validator.IsValid)
+            return true;
+
+        SendNotification(validator);
+        return false;
+    }
+
+    protected async Task<bool> DoValidationAsync<TValidation, TEntity, TKey>(TValidation validation, TEntity entity)
+        where TValidation : AbstractValidator<TEntity>
+        where TEntity : Entity<TKey>
+    {
+        var validator = await validation.ValidateAsync(entity);
 
         if (validator.IsValid)
             return true;

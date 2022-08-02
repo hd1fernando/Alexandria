@@ -17,8 +17,11 @@ builder.Services.AddSwaggerGen();
 
 // DI
 builder.Services.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
+builder.Services.AddTransient<IBookRepository, BookRepository>();
+
 builder.Services.AddScoped<INotifier, Notifier>();
 builder.Services.AddTransient<IBookService, BookService>();
+
 
 builder.Services.AddNHibernate(builder.Configuration);
 
