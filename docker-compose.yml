@@ -2,8 +2,8 @@ version: '3'
 
 services:
   db:
-    image: "mcr.microsoft.com/mssql/server:2019-CU16-GDR1-ubuntu-20.04"
-    container_name: mssql
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    container_name: mssql-alexandria
     command: /bin/bash ./entrypoint.sh
     ports:
       - 1433:1433
@@ -14,4 +14,4 @@ services:
       - ./data:/var/opt/mssql/data
       - ./data/entrypoint.sh:/entrypoint.sh
       - ./data/db-init.sh:/db-init.sh
-      - ./data/db-init.sql:/db-init.sql 
+      - ./data/db-init.sql:/db-init.sql
