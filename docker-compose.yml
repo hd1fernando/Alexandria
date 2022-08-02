@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-CU16-GDR1-ubuntu-20.04"
+    container_name: mssql
+    command: /bin/bash ./entrypoint.sh
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=P@ssword42
+    volumes:
+      - ./data:/var/opt/mssql/data
+      - ./data/entrypoint.sh:/entrypoint.sh
+      - ./data/db-init.sh:/db-init.sh
+      - ./data/db-init.sql:/db-init.sql 
