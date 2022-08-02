@@ -4,8 +4,8 @@ GO
 IF DB_ID('Alexandria') IS NOT NULL
 	set noexec on               -- prevent creation when already exists
 
-CREATE DATABASE [MercadoLivreClone];
+CREATE DATABASE [Alexandria];
 GO
 
-USE [MercadoLivre]
+USE [Alexandria]
 GO
