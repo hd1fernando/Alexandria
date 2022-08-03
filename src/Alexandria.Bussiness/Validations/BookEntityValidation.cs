@@ -3,6 +3,7 @@ using Alexandria.Bussiness.Intefaces.Repositories;
 using FluentValidation;
 
 namespace Alexandria.Bussiness.Validations;
+
 public class BookEntityValidation : AbstractValidator<BookEntity>
 {
     private readonly IBookRepository _bookRepository;

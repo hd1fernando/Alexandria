@@ -9,7 +9,7 @@ public class BookController : MainController
 {
     private readonly IBookService _bookService;
 
-    public BookController(IBookService bookService, INotifier notifier) : base(notifier) 
+    public BookController(IBookService bookService, INotifier notifier) : base(notifier)
         => _bookService = bookService;
 
     [HttpPost]

@@ -21,10 +21,9 @@ builder.Services.AddTransient<IBookRepository, BookRepository>();
 
 builder.Services.AddScoped<INotifier, Notifier>();
 builder.Services.AddTransient<IBookService, BookService>();
-
+builder.Services.AddTransient<IBookInstanceService, BookInstanceService>();
 
 builder.Services.AddNHibernate(builder.Configuration);
-
 
 var app = builder.Build();
 
