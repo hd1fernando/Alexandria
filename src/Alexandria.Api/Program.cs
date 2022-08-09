@@ -4,7 +4,9 @@ using Alexandria.Bussiness.Interfaces.Notifications;
 using Alexandria.Bussiness.Interfaces.Services;
 using Alexandria.Bussiness.Notifications;
 using Alexandria.Bussiness.Services;
+using Alexandria.Identity.Data;
 using Alexandria.Infra.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Identity
+builder.Services.AddDbContext<IdentityDataContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+// NHibernate
+builder.Services.AddNHibernate(builder.Configuration);
+
 // DI
 builder.Services.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
 builder.Services.AddTransient<IBookRepository, BookRepository>();
@@ -23,7 +34,6 @@ builder.Services.AddScoped<INotifier, Notifier>();
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<IBookInstanceService, BookInstanceService>();
 
-builder.Services.AddNHibernate(builder.Configuration);
 
 var app = builder.Build();
 

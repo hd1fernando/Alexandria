@@ -8,12 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="FluentNHibernate" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="NHibernate" Version="5.3.12" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Alexandria.Bussiness\Alexandria.Bussiness.csproj" />
+    <ProjectReference Include="..\Alexandria.Identity\Alexandria.Identity.csproj" />
     <ProjectReference Include="..\Alexandria.Infra\Alexandria.Infra.csproj" />
   </ItemGroup>
 
