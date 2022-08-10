@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alexandria.Api.Dtos;
+namespace Alexandria.ApplicationService.Dtos.Request;
 
 public class BookInstanceViewModel
 {

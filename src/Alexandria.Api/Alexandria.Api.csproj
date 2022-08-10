@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Alexandria.ApplicationService\Alexandria.ApplicationService.csproj" />
     <ProjectReference Include="..\Alexandria.Bussiness\Alexandria.Bussiness.csproj" />
     <ProjectReference Include="..\Alexandria.Identity\Alexandria.Identity.csproj" />
     <ProjectReference Include="..\Alexandria.Infra\Alexandria.Infra.csproj" />

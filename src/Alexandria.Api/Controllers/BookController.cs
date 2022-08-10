@@ -1,4 +1,4 @@
-﻿using Alexandria.Api.Dtos;
+﻿using Alexandria.ApplicationService.Dtos.Request;
 using Alexandria.Bussiness.Interfaces.Notifications;
 using Alexandria.Bussiness.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
