@@ -1,11 +1,15 @@
 using Alexandria.Api.Extensions;
+using Alexandria.ApplicationService.Interfaces;
 using Alexandria.Bussiness.Intefaces.Repositories;
 using Alexandria.Bussiness.Interfaces.Notifications;
 using Alexandria.Bussiness.Interfaces.Services;
 using Alexandria.Bussiness.Notifications;
 using Alexandria.Bussiness.Services;
+using Alexandria.Identity.Configurations;
 using Alexandria.Identity.Data;
+using Alexandria.Identity.Services;
 using Alexandria.Infra.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,17 +27,27 @@ builder.Services.AddDbContext<IdentityDataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<IdentityDataContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IIdentityService, IdentityService>();
+
 // NHibernate
 builder.Services.AddNHibernate(builder.Configuration);
 
 // DI
-builder.Services.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
-builder.Services.AddTransient<IBookRepository, BookRepository>();
+builder.Services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 builder.Services.AddScoped<INotifier, Notifier>();
-builder.Services.AddTransient<IBookService, BookService>();
-builder.Services.AddTransient<IBookInstanceService, BookInstanceService>();
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IBookInstanceService, BookInstanceService>();
 
+// AppSettings.json
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
 
 var app = builder.Build();
 
@@ -43,6 +57,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseAuthentication();
 
 app.UseHttpsRedirection();
 

@@ -1,12 +1,16 @@
 ﻿using Alexandria.ApplicationService.Dtos.Request;
 using Alexandria.ApplicationService.Dtos.Response;
 using Alexandria.ApplicationService.Interfaces;
+using Alexandria.Identity.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace Alexandria.Identity.Services;
 
-internal class IdentityService : IIdentityService
+public class IdentityService : IIdentityService
 {
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly UserManager<IdentityUser> _usermanger;
@@ -65,8 +69,40 @@ internal class IdentityService : IIdentityService
         return userLoginResponse;
     }
 
-    private Task<UserLoginRespose> GenerateTokenAsync(string? email)
+    private async Task<UserLoginRespose> GenerateTokenAsync(string? email)
     {
-        throw new NotImplementedException();
+        var user = await _usermanger.FindByEmailAsync(email);
+        var tokenClaims = await ObterClaimsAsync(user);
+
+        var expirationTime = DateTime.Now.AddSeconds(_jwtOptions.Expiration);
+
+        var jwt = new JwtSecurityToken(
+            _jwtOptions.Issuer,
+            _jwtOptions.Audience,
+            tokenClaims,
+             DateTime.Now,
+             expirationTime,
+             _jwtOptions.SigningCredentials);
+
+        var token = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+        return new UserLoginRespose(true, token, expirationTime);
+    }
+
+    private async Task<IList<Claim>> ObterClaimsAsync(IdentityUser user)
+    {
+        var claims = await _usermanger.GetClaimsAsync(user);
+        var roles = await _usermanger.GetRolesAsync(user);
+
+        claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
+        claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
+        claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+        claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, DateTime.Now.ToString()));
+        claims.Add(new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString()));
+
+        foreach (var role in roles)
+            claims.Add(new Claim("role", role));
+
+        return claims;
     }
 }
