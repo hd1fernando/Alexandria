@@ -27,13 +27,14 @@ builder.Services.AddDbContext<IdentityDataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-
 builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<IdentityDataContext>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IIdentityService, IdentityService>();
+
+builder.Services.AddAuthentitcation(builder.Configuration);
 
 // NHibernate
 builder.Services.AddNHibernate(builder.Configuration);
@@ -46,8 +47,6 @@ builder.Services.AddScoped<INotifier, Notifier>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IBookInstanceService, BookInstanceService>();
 
-// AppSettings.json
-builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
 
 var app = builder.Build();
 

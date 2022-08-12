@@ -3,6 +3,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
 namespace Alexandria.Api.Extensions;
+
 public static class NHibernateExtensions
 {
     public static IServiceCollection AddNHibernate(this IServiceCollection services, IConfiguration configuration)
