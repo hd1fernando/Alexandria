@@ -6,6 +6,6 @@ using Alexandria.ApplicationService.Dtos.Response;
 namespace Alexandria.ApplicationService.Interfaces;
 public interface IIdentityService
 {
-    public Task<CreatedUserResponse> CreateUser(UserViewModel userViewModel, CancellationToken cancellationToken);
-    public Task<UserLoginRespose> Login(UserLoginViewModel userLoginViewModel, CancellationToken cancellationToken);
+    public Task<CreatedUserResponse> CreateUser(UserViewModel userViewModel);
+    public Task<UserLoginRespose> Login(UserLoginViewModel userLoginViewModel);
 }

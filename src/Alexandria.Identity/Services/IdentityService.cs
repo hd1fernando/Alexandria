@@ -25,7 +25,7 @@ public class IdentityService : IIdentityService
         _jwtOptions = jwtOptions.Value;
     }
 
-    public async Task<CreatedUserResponse> CreateUser(UserViewModel userViewModel, CancellationToken cancellationToken)
+    public async Task<CreatedUserResponse> CreateUser(UserViewModel userViewModel)
     {
         var identityUser = new IdentityUser
         {
@@ -46,7 +46,7 @@ public class IdentityService : IIdentityService
         return createUserResponse;
     }
 
-    public async Task<UserLoginRespose> Login(UserLoginViewModel userLoginViewModel, CancellationToken cancellationToken)
+    public async Task<UserLoginRespose> Login(UserLoginViewModel userLoginViewModel)
     {
         var result = await _signInManager.PasswordSignInAsync(userLoginViewModel.Email, userLoginViewModel.Password, false, true);
 
