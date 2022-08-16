@@ -16,7 +16,7 @@ public static class AuthenticationSetup
         {
             options.Issuer = jwtSettingOptions["Issuer"];
             options.Audience = jwtSettingOptions["Audience"];
-            options.SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
+            options.SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
             options.Expiration = int.Parse(jwtSettingOptions["Expiration"] ?? "0");
         });
 
