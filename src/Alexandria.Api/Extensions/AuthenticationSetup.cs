@@ -1,5 +1,6 @@
 ﻿using Alexandria.Identity.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -54,8 +55,15 @@ public static class AuthenticationSetup
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(options =>
         {
-            // adiciona suporte ao JWT informado que ele deve serguir a validação criada no objeto tokenValidationParameters
+            options.RequireHttpsMetadata = false;
+            options.SaveToken = true;
+            // adiciona suporte ao JWT informando que ele deve serguir a validação criada no objeto tokenValidationParameters
             options.TokenValidationParameters = tokenValidationParameters;
         });
+    }
+
+    public static void AddAuthorizationPolices(this IServiceCollection services)
+    {
+        //services.AddSingleton<IAuthorizationHandler>();
     }
 }

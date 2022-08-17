@@ -1,5 +1,6 @@
 ﻿using Alexandria.Bussiness.Interfaces.Notifications;
 using Alexandria.Bussiness.Notifications;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -7,6 +8,7 @@ namespace Alexandria.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public abstract class MainController : ControllerBase
 {
     private readonly INotifier _notifier;

@@ -72,7 +72,7 @@ public class IdentityService : IIdentityService
     private async Task<UserLoginRespose> GenerateTokenAsync(string? email)
     {
         var user = await _usermanger.FindByEmailAsync(email);
-        var tokenClaims = await ObterClaimsAsync(user);
+        var tokenClaims = await GetClaimsAsync(user);
 
         var expirationTime = DateTime.Now.AddSeconds(_jwtOptions.Expiration);
 
@@ -89,7 +89,7 @@ public class IdentityService : IIdentityService
         return new UserLoginRespose(true, token, expirationTime);
     }
 
-    private async Task<IList<Claim>> ObterClaimsAsync(IdentityUser user)
+    private async Task<IList<Claim>> GetClaimsAsync(IdentityUser user)
     {
         var claims = await _usermanger.GetClaimsAsync(user);
         var roles = await _usermanger.GetRolesAsync(user);
@@ -97,12 +97,17 @@ public class IdentityService : IIdentityService
         claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
         claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
         claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-        claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, DateTime.Now.ToString()));
-        claims.Add(new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString()));
+        claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, ToUnixEpochDate(DateTime.UtcNow).ToString()));
+        claims.Add(new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(DateTime.UtcNow).ToString(), ClaimValueTypes.Integer64));
+
 
         foreach (var role in roles)
             claims.Add(new Claim("role", role));
 
         return claims;
     }
+
+    private static long ToUnixEpochDate(DateTime date)
+      => (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
+
 }
