@@ -5,7 +5,6 @@ using Alexandria.Bussiness.Interfaces.Notifications;
 using Alexandria.Bussiness.Interfaces.Services;
 using Alexandria.Bussiness.Notifications;
 using Alexandria.Bussiness.Services;
-using Alexandria.Identity.Configurations;
 using Alexandria.Identity.Data;
 using Alexandria.Identity.Services;
 using Alexandria.Infra.Repositories;
@@ -63,5 +62,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+await app.CreateRolesAsync(builder.Configuration);
 
 app.Run();

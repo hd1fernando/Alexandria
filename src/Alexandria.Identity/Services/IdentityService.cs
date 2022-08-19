@@ -35,7 +35,9 @@ public class IdentityService : IIdentityService
             EmailConfirmed = true
         };
 
-        var result = await _usermanger.CreateAsync(identityUser, userViewModel.Password);
+        await _usermanger.CreateAsync(identityUser, userViewModel.Password);
+        var result = await _usermanger.AddToRoleAsync(identityUser, userViewModel.UserType);
+
         if (result.Succeeded)
             await _usermanger.SetLockoutEnabledAsync(identityUser, false);
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Alexandria.ApplicationService.Dtos.Anottations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alexandria.ApplicationService.Dtos.Request;
 
@@ -13,6 +14,10 @@ public class UserViewModel
 
     [Compare(nameof(Password), ErrorMessage = "As senhas devem ser iguais")]
     public string? ConfirmPassowrd { get; set; }
+
+    [Required(ErrorMessage = "{0} é obrigatório.")]
+    [ValidUserType(ErrorMessage = "UserType inválido.")]
+    public string? UserType { get; set; }
 
 }
 
