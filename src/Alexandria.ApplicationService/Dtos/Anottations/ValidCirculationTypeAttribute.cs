@@ -2,13 +2,13 @@
 
 namespace Alexandria.ApplicationService.Dtos.Anottations;
 
-public class ValidUserTypeAttribute : ValidationAttribute
+public class ValidCirculationTypeAttribute : ValidationAttribute
 {
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
         var type = value?.ToString().Trim().ToLower();
 
-        if ("default".Equals(type) || "academic".Equals(value))
+        if ("common".Equals(type) || "restrict".Equals(type))
             return ValidationResult.Success;
 
         return new ValidationResult(ErrorMessage);
