@@ -3,17 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexandria.Api", "src\Alexandria.Api\Alexandria.Api.csproj", "{ED863078-6CC0-483B-B0B5-7D84985C656D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexandria.Bussiness", "src\Alexandria.Bussiness\Alexandria.Bussiness.csproj", "{573F989B-C317-4217-B233-49E113221E30}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexandria.Infra", "src\Alexandria.Infra\Alexandria.Infra.csproj", "{D5DD6A59-55AB-47B5-8785-F0B2B7B4933B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexandria.Migrations", "src\Alexandria.Migrations\Alexandria.Migrations.csproj", "{223BA2BE-B226-415A-AF6B-F33B1723B1BF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexandria.Identity", "src\Alexandria.Identity\Alexandria.Identity.csproj", "{38996F8A-C9E6-4897-B783-69906823F84D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexandria.ApplicationService", "src\Alexandria.ApplicationService\Alexandria.ApplicationService.csproj", "{71B05E96-FBAD-4E17-85C5-3D52C04AFFE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Api", "Alexandria.Api\Alexandria.Api.csproj", "{4442D798-8866-47DF-A3AB-6D869935E5C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,30 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ED863078-6CC0-483B-B0B5-7D84985C656D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED863078-6CC0-483B-B0B5-7D84985C656D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED863078-6CC0-483B-B0B5-7D84985C656D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED863078-6CC0-483B-B0B5-7D84985C656D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{573F989B-C317-4217-B233-49E113221E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{573F989B-C317-4217-B233-49E113221E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{573F989B-C317-4217-B233-49E113221E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{573F989B-C317-4217-B233-49E113221E30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5DD6A59-55AB-47B5-8785-F0B2B7B4933B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5DD6A59-55AB-47B5-8785-F0B2B7B4933B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5DD6A59-55AB-47B5-8785-F0B2B7B4933B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5DD6A59-55AB-47B5-8785-F0B2B7B4933B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{223BA2BE-B226-415A-AF6B-F33B1723B1BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{223BA2BE-B226-415A-AF6B-F33B1723B1BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{223BA2BE-B226-415A-AF6B-F33B1723B1BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{223BA2BE-B226-415A-AF6B-F33B1723B1BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38996F8A-C9E6-4897-B783-69906823F84D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38996F8A-C9E6-4897-B783-69906823F84D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38996F8A-C9E6-4897-B783-69906823F84D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38996F8A-C9E6-4897-B783-69906823F84D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71B05E96-FBAD-4E17-85C5-3D52C04AFFE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71B05E96-FBAD-4E17-85C5-3D52C04AFFE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71B05E96-FBAD-4E17-85C5-3D52C04AFFE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71B05E96-FBAD-4E17-85C5-3D52C04AFFE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4442D798-8866-47DF-A3AB-6D869935E5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4442D798-8866-47DF-A3AB-6D869935E5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4442D798-8866-47DF-A3AB-6D869935E5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4442D798-8866-47DF-A3AB-6D869935E5C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
