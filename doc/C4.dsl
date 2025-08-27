@@ -5,14 +5,16 @@ workspace "Name" "Description" {
     model {
         admin = person "Administrador"  "Um Usuário não cadastrado responsável por cadastrar Livros, Categoria e Autores"
         client = person "Cliente" "Usuário não cadastrado que deseja realizar a compra de um livro"
-        system = softwareSystem "Alexandria" {
-            wa = container "Web Application"
-            db = container "Database Schema" {
+        system = softwareSystem "Alexandria" "Lida com cadastro de livros e suas vendas"{
+            wa = container "Web API" "Aplicação web quer fornece serviços de cadastros e compra de livros"
+            db = container "Banco de Dados" "Livros, categorias, autores, cidades, etc" {
                 tags "Database"
             }
         }
+        systemPayment = softwareSystem "Sistema de Pagamentos"
         admin -> system.wa "Cadastra Livros" "Software que realiza venda se livros"
-        system.wa -> system.db "Reads from and writes to"
+        system.wa -> systemPayment "Realiza pagamento"
+        system.wa -> system.db "Lê e escreve informações no"
         client -> system.wa "Compra Livros"
     }
 
@@ -52,5 +54,5 @@ workspace "Name" "Description" {
     configuration {
         scope softwaresystem
     }
-
 }
+
