@@ -52,7 +52,3 @@ Alexandria/
 
 When running in development mode, Swagger UI is available at:
 - `/swagger` - Interactive API documentation
-
-## License
-
-MIT
