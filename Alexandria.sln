@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Api", "Alexandria.Api\Alexandria.Api.csproj", "{4442D798-8866-47DF-A3AB-6D869935E5C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Api", "src\Alexandria.Api\Alexandria.Api.csproj", "{4442D798-8866-47DF-A3AB-6D869935E5C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Api.IntegrationTest", "tst\integration\Alexandria.Api.IntegrationTest\Alexandria.Api.IntegrationTest.csproj", "{2F029409-C00A-4DD5-8153-80D3BA6ACBF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Api.IntegrationTest", "tests\integration\Alexandria.Api.IntegrationTest\Alexandria.Api.IntegrationTest.csproj", "{2F029409-C00A-4DD5-8153-80D3BA6ACBF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

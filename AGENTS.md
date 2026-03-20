@@ -37,7 +37,7 @@ dotnet test --filter "FullyQualifiedName~AuthorTest.Create_ShouldReturnOk"
 ```
 
 ### Test Projects
-- **Integration Tests**: `tst/integration/Alexandria.Api.IntegrationTest/`
+- **Integration Tests**: `tests/integration/Alexandria.Api.IntegrationTest/`
 - **Framework**: xUnit
 - **Test Data**: Bogus
 - **Containers**: Testcontainers (for SQL Server)
@@ -83,15 +83,16 @@ Alexandria.Api/
 - Use xUnit's `[Fact]` attribute
 - Use `Testcontainers.MsSql` for database integration tests
 - Use `Bogus` for generating test data
-- Test files go in `tst/integration/`
+- Test files go in `tests/integration/`
 
 ## Project Structure
 
 ```
 Alexandria/
 ├── Alexandria.sln
-├── Alexandria.Api/          # Main web API project
-├── tst/
+├── src/
+│   └── Alexandria.Api/      # Main web API project
+├── tests/
 │   └── integration/
 │       └── Alexandria.Api.IntegrationTest/
 └── .github/workflows/
@@ -107,6 +108,37 @@ Alexandria/
 - **Bogus** (fake data)
 - **Testcontainers** (Docker containers for tests)
 
+## Git Conventions
+
+### Commit Message Format
+All commits MUST use gitmoji format:
+
+```
+<emoji> <type>: <description>
+
+- <optional detailed changes>
+```
+
+### Common Gitmoji
+- `:rocket:` `feat:` - New feature
+- `:bug:` `fix:` - Bug fix
+- `:recycle:` `refactor:` - Code refactoring
+- `:memo:` `docs:` - Documentation changes
+- `:white_check_mark:` `test:` - Adding or updating tests
+- `:lipstick:` `style:` - Formatting, missing semicolons, etc.
+- `:construction:` `chore:` - Maintenance tasks, dependencies
+- `:arrow_up:` `upgrade:` - Dependency or framework upgrades
+- `:sparkles:` `perf:` - Performance improvements
+
+### Commit Example
+```
+🚀 feat: add author creation endpoint
+
+- Add CreateAuthorRequest DTO
+- Implement AuthorController.CreateAsync
+- Add validation for required fields
+```
+
 ## Common Tasks
 
 ### Adding a new endpoint
@@ -117,10 +149,10 @@ Alexandria/
 
 ### Running locally
 ```bash
-dotnet run --project Alexandria.Api
+dotnet run --project src/Alexandria.Api
 ```
 
 ### Running specific test project
 ```bash
-dotnet test tst/integration/Alexandria.Api.IntegrationTest/
+dotnet test tests/integration/Alexandria.Api.IntegrationTest/
 ```

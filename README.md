@@ -27,7 +27,7 @@ dotnet restore
 dotnet build
 
 # Run the API
-dotnet run --project Alexandria.Api
+dotnet run --project src/Alexandria.Api
 
 # Run tests
 dotnet test
@@ -37,11 +37,12 @@ dotnet test
 
 ```
 Alexandria/
-├── Alexandria.Api/              # Main Web API project
-│   ├── Controllers/             # API controllers
-│   │   └── Dtos/                # Request/Response DTOs
-│   └── Program.cs               # Application entry point
-├── tst/
+├── src/
+│   └── Alexandria.Api/          # Main Web API project
+│       ├── Controllers/          # API controllers
+│       │   └── Dtos/            # Request/Response DTOs
+│       └── Program.cs           # Application entry point
+├── tests/
 │   └── integration/
 │       └── Alexandria.Api.IntegrationTest/  # Integration tests
 └── .github/workflows/           # CI/CD pipelines
