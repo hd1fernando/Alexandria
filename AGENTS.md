@@ -64,6 +64,17 @@ Alexandria.Api/
 │   ├── AuthorController.cs
 │   └── Dtos/
 │       └── CreateAuthorRequest.cs
+├── Domain/
+│   ├── Entities/
+│   │   └── Author.cs
+│   └── ValueObjects/
+│       └── Address.cs
+├── Repositories/
+│   ├── Authors/
+│   │   ├── IAuthorRepository.cs
+│   │   └── AuthorRepository.cs
+│   └── Mappings/
+│       └── AuthorMapping.cs
 └── Program.cs
 ```
 
@@ -92,12 +103,33 @@ Alexandria/
 ├── Alexandria.sln
 ├── src/
 │   └── Alexandria.Api/      # Main web API project
+│       ├── Controllers/     # Endpoints HTTP
+│       │   └── Dtos/        # Request/Response DTOs
+│       ├── Domain/          # Entidades e Value Objects
+│       │   ├── Entities/
+│       │   └── ValueObjects/
+│       └── Repositories/    # Repositórios e Mapeamentos EF Core
+│           └── Mappings/
 ├── tests/
 │   └── integration/
 │       └── Alexandria.Api.IntegrationTest/
+├── doc/
+│   └── ARCHITECTURE.md      # Documentação da arquitetura
 └── .github/workflows/
     └── dotnet.yml           # CI/CD pipeline
 ```
+
+## Architecture
+
+Alexandria follows a layered architecture. See [doc/ARCHITECTURE.md](doc/ARCHITECTURE.md) for full details.
+
+**Layers**: Controllers → Dtos → Domain → Repositories
+
+**Key Rules**:
+- Domain layer has no external dependencies (pure business logic)
+- Entities: Objects with identity (Author, Book, Category)
+- Value Objects: Immutable objects without identity (Address, Money)
+- Repositories: Data persistence with EF Core
 
 ## Dependencies
 
@@ -142,10 +174,16 @@ All commits MUST use gitmoji format:
 ## Common Tasks
 
 ### Adding a new endpoint
-1. Create DTO in `Controllers/Dtos/`
-2. Create controller inheriting from `MainController`
-3. Add HTTP attribute (`[HttpPost]`, `[HttpGet]`, etc.)
-4. Return appropriate `ActionResult` type
+1. Create Entity in `Domain/Entities/`
+2. Create Value Objects (if needed) in `Domain/ValueObjects/`
+3. Create Repository interface in `Repositories/{Resource}/`
+4. Create Repository implementation
+5. Create EF Core mapping in `Repositories/Mappings/`
+6. Create DTOs in `Controllers/Dtos/`
+7. Create controller inheriting from `MainController`
+8. Register dependencies in `Program.cs`
+
+See [doc/ARCHITECTURE.md](doc/ARCHITECTURE.md) for detailed examples.
 
 ### Running locally
 ```bash
