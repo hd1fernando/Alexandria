@@ -60,21 +60,15 @@ dotnet test --filter "FullyQualifiedName~AuthorTest.Create_ShouldReturnOk"
 ```
 Alexandria.Api/
 ├── Controllers/
-│   ├── MainController.cs (base controller)
-│   ├── AuthorController.cs
 │   └── Dtos/
-│       └── CreateAuthorRequest.cs
 ├── Domain/
 │   ├── Entities/
-│   │   └── Author.cs
 │   └── ValueObjects/
-│       └── Address.cs
 ├── Repositories/
 │   ├── Authors/
-│   │   ├── IAuthorRepository.cs
-│   │   └── AuthorRepository.cs
+│   ├── Books/
+│   ├── Categories/
 │   └── Mappings/
-│       └── AuthorMapping.cs
 └── Program.cs
 ```
 

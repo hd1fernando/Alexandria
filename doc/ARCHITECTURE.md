@@ -32,40 +32,15 @@ Alexandria segue uma arquitetura em camadas com responsabilidade única, organiz
 ```
 src/Alexandria.Api/
 ├── Controllers/
-│   ├── MainController.cs
-│   ├── AuthorController.cs
 │   └── Dtos/
-│       ├── CreateAuthorRequest.cs
-│       └── AuthorResponse.cs
-│
 ├── Domain/
 │   ├── Entities/
-│   │   ├── BaseEntity.cs
-│   │   ├── Author.cs
-│   │   ├── Book.cs
-│   │   └── Category.cs
-│   │
 │   └── ValueObjects/
-│       ├── Address.cs
-│       └── Money.cs
-│
 └── Repositories/
     ├── Authors/
-    │   ├── IAuthorRepository.cs
-    │   └── AuthorRepository.cs
-    │
     ├── Books/
-    │   ├── IBookRepository.cs
-    │   └── BookRepository.cs
-    │
     ├── Categories/
-    │   ├── ICategoryRepository.cs
-    │   └── CategoryRepository.cs
-    │
     └── Mappings/
-        ├── AuthorMapping.cs
-        ├── BookMapping.cs
-        └── CategoryMapping.cs
 ```
 
 ## Camadas
