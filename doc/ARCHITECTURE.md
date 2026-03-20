@@ -16,6 +16,12 @@ Alexandria segue uma arquitetura em camadas com responsabilidade única, organiz
 └─────────────────────────────┬────────────────────────────────┘
                               │
 ┌─────────────────────────────▼────────────────────────────────┐
+│                         Services                              │
+│                   Lógica de negócio                            │
+│             (Orquestração e validações)                       │
+└─────────────────────────────┬────────────────────────────────┘
+                              │
+┌─────────────────────────────▼────────────────────────────────┐
 │                          Domain                               │
 │                 Entidades e Value Objects                       │
 │              (Regras de negócio puras)                         │
@@ -36,6 +42,10 @@ src/Alexandria.Api/
 ├── Domain/
 │   ├── Entities/
 │   └── ValueObjects/
+├── Services/
+│   ├── Authors/
+│   ├── Books/
+│   └── Categories/
 └── Repositories/
     ├── Authors/
     ├── Books/
@@ -60,6 +70,26 @@ Responsabilidade: Transferência de dados entre a API e as demais camadas.
 - **Request DTOs**: Validação de entrada (`CreateAuthorRequest`, `UpdateAuthorRequest`)
 - **Response DTOs**: Formato das respostas (`AuthorResponse`, `AuthorListResponse`)
 - Localização: `Controllers/Dtos/`
+
+### Services
+
+Responsabilidade: Lógica de negócio, orquestração de operações e validações complexas.
+
+- Um service por recurso (Author, Book, Category)
+- Contém a lógica de negócio principal
+- Orquestra chamadas ao Domain e Repositories
+- Localização: `Services/{Resource}/`
+
+#### Interfaces
+
+Contratos que definem as operações de serviço.
+
+- Uma interface por Entity
+- Define operações de negócio (`CreateAsync`, `UpdateAsync`, etc.)
+
+#### Implementações
+
+Implementações concretas das interfaces de serviço.
 
 ### Domain
 
@@ -175,16 +205,46 @@ public class AuthorMapping : IEntityTypeConfiguration<Author>
 }
 ```
 
+### Services
+
+```csharp
+public interface IAuthorService
+{
+    Task<AuthorResponse> CreateAsync(CreateAuthorRequest request, CancellationToken cancellationToken);
+    Task<AuthorResponse?> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<IEnumerable<AuthorResponse>> GetAllAsync(CancellationToken cancellationToken);
+}
+
+public class AuthorService : IAuthorService
+{
+    private readonly IAuthorRepository _authorRepository;
+
+    public AuthorService(IAuthorRepository authorRepository)
+    {
+        _authorRepository = authorRepository;
+    }
+
+    public async Task<AuthorResponse> CreateAsync(CreateAuthorRequest request, CancellationToken cancellationToken)
+    {
+        // Lógica de negócio
+        var author = new Author(request.Name, request.Email, request.Description);
+        
+        await _authorRepository.AddAsync(author, cancellationToken);
+        
+        return new AuthorResponse(author);
+    }
+}
+```
+
 ## Fluxo de Dados
 
 ```
-┌──────────┐    ┌────────────┐    ┌────────┐    ┌───────────┐    ┌────────────┐    ┌──────────┐
-│  Client   │───▶│ Controller │───▶│  Dto   │───▶│  Service  │───▶│ Repository │───▶│ Database │
-└──────────┘    └────────────┘    └────────┘    └───────────┘    └────────────┘    └──────────┘
-                  ▲                                                                   │
-                  │                         Domain                                     │
-                  └──────────────────── (Entities & Value Objects) ◀───────────────────┘
+┌──────────┐    ┌────────────┐    ┌────────┐    ┌──────────┐    ┌───────────┐    ┌────────────┐    ┌──────────┐
+│  Client   │───▶│ Controller │───▶│  Dto   │───▶│ Service  │───▶│  Domain   │───▶│ Repository │───▶│ Database │
+└──────────┘    └────────────┘    └────────┘    └──────────┘    └───────────┘    └────────────┘    └──────────┘
 ```
+
+**Fluxo**: Controller → Dto → Service → Domain/Repository → Database
 
 ## Como Criar um Novo Recurso
 
@@ -208,14 +268,22 @@ Criar classe em `Repositories/{Resource}/`
 
 Criar classe em `Repositories/Mappings/`
 
-### 6. Criar DTOs
+### 6. Criar Service Interface
+
+Criar interface em `Services/{Resource}/`
+
+### 7. Criar Service Implementation
+
+Criar classe em `Services/{Resource}/`
+
+### 8. Criar DTOs
 
 Criar em `Controllers/Dtos/`
 
-### 7. Criar/Atualizar Controller
+### 9. Criar/Atualizar Controller
 
 Criar ou atualizar em `Controllers/`
 
-### 8. Registrar Dependências
+### 10. Registrar Dependências
 
 Configurar injeção de dependências no `Program.cs`

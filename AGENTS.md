@@ -64,6 +64,10 @@ Alexandria.Api/
 ├── Domain/
 │   ├── Entities/
 │   └── ValueObjects/
+├── Services/
+│   ├── Authors/
+│   ├── Books/
+│   └── Categories/
 ├── Repositories/
 │   ├── Authors/
 │   ├── Books/
@@ -102,7 +106,14 @@ Alexandria/
 │       ├── Domain/          # Entidades e Value Objects
 │       │   ├── Entities/
 │       │   └── ValueObjects/
+│       ├── Services/       # Lógica de negócio
+│       │   ├── Authors/
+│       │   ├── Books/
+│       │   └── Categories/
 │       └── Repositories/    # Repositórios e Mapeamentos EF Core
+│           ├── Authors/
+│           ├── Books/
+│           ├── Categories/
 │           └── Mappings/
 ├── tests/
 │   └── integration/
@@ -117,10 +128,11 @@ Alexandria/
 
 Alexandria follows a layered architecture. See [doc/ARCHITECTURE.md](doc/ARCHITECTURE.md) for full details.
 
-**Layers**: Controllers → Dtos → Domain → Repositories
+**Layers**: Controllers → Dtos → Services → Domain → Repositories
 
 **Key Rules**:
 - Domain layer has no external dependencies (pure business logic)
+- Services layer contains business logic and orchestration
 - Entities: Objects with identity (Author, Book, Category)
 - Value Objects: Immutable objects without identity (Address, Money)
 - Repositories: Data persistence with EF Core
@@ -173,9 +185,11 @@ All commits MUST use gitmoji format:
 3. Create Repository interface in `Repositories/{Resource}/`
 4. Create Repository implementation
 5. Create EF Core mapping in `Repositories/Mappings/`
-6. Create DTOs in `Controllers/Dtos/`
-7. Create controller inheriting from `MainController`
-8. Register dependencies in `Program.cs`
+6. Create Service interface in `Services/{Resource}/`
+7. Create Service implementation
+8. Create DTOs in `Controllers/Dtos/`
+9. Create controller inheriting from `MainController`
+10. Register dependencies in `Program.cs`
 
 See [doc/ARCHITECTURE.md](doc/ARCHITECTURE.md) for detailed examples.
 
